@@ -22,10 +22,12 @@ function getComputerChoice() {
 
 let humanScore = 0;
 let computerScore = 0;
+let rounds = 0;
+let maxRound = 5;
 
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
-    result.textContent ="It's a tie!";
+    result.textContent = "It's a tie!";
   } else if (humanChoice === "rock" && computerChoice === "scissors") {
     humanScore++;
     result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
@@ -40,25 +42,23 @@ function playRound(humanChoice, computerChoice) {
     result.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
   }
 
+  rounds++;
   score.textContent = `Score → Human: ${humanScore}  Computer: ${computerScore}`;
+
+  // rounds end logic
+  if (rounds === maxRound) {
+    if (humanScore > computerScore) {
+      alert(`You win the game! Final score: ${humanScore} - ${computerScore}`);
+    } else if (computerScore > humanScore) {
+      alert(`You lose the game! Final score: ${humanScore} - ${computerScore}`);
+    } else {
+      alert(`It's a draw! Final score: ${humanScore} - ${computerScore}`);
+    }
+
+    // Reset for new game 
+    humanScore = 0;
+    computerScore = 0;
+    rounds = 0;
+    score.textContent = `Score → Human: ${humanScore}  Computer: ${computerScore}`;
+  }
 }
-
-// function playGame() {
-//   for (let i = 0; i < 5; i++) {
-//     let humanChoice = getHumanChoice();
-//     let computerChoice = getComputerChoice();
-//     playRound(humanChoice, computerChoice);
-//   }
-
-//   if (humanScore > computerScore) {
-//     console.log(`You win the game! Final score: ${humanScore} - ${computerScore}`);
-//   } else if (computerScore > humanScore) {
-//     console.log(`You lose the game! Final score: ${humanScore} - ${computerScore}`);
-//   } else {
-//     console.log(`It's a draw! Final score: ${humanScore} - ${computerScore}`);
-//   }
-// }
-
-// playGame();
-
-
